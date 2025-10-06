@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Switch Tracker — Apply job</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="apply">
+  <div class="app">
+    <aside class="sidebar" role="navigation">
+      <div class="brand">
+        <div class="logo">ST</div>
+        <div>
+          <div style="font-weight:700">Switch Tracker</div>
+          <div class="small">Record a new application</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="daily.html">📅 Daily job update</a>
+        <a href="apply.html">📝 Apply job</a>
+        <a href="applied.html">📋 Applied jobs</a>
+      </nav>
+      <button class="collapse-toggle">Toggle sidebar</button>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div>
+          <div class="title">Apply to a company</div>
+          <div class="subtitle">Fill the form below to save an application</div>
+        </div>
+      </div>
+
+      <section class="card">
+        <form id="applyForm" class="form-grid" aria-label="Apply form">
+          <div>
+            <label class="small">Company name</label>
+            <input name="company_name" class="input" required />
+          </div>
+
+          <div>
+            <label class="small">Contacted via LinkedIn</label>
+            <div class="row">
+              <input type="checkbox" name="contacted_via_linkedin" id="contacted" />
+              <label for="contacted" class="small">Yes</label>
+            </div>
+          </div>
+
+          
+          <div style="grid-column: 1 / -1;">
+            <label class="small">Company careers page link</label>
+            <input name="careers_link" class="input" type="url" placeholder="https://company.com/careers" />
+          </div>
+
+          <div style="grid-column: 1 / -1;">
+            <label class="small">Notes</label>
+            <textarea name="notes" class="input" rows="3" placeholder="Any notes for this application"></textarea>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;grid-column: 1 / -1;">
+            <button type="submit" class="cta-btn">Save application</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

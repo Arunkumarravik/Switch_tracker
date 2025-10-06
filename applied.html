@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Switch Tracker — Applied jobs</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="applied">
+  <div class="app">
+    <aside class="sidebar" role="navigation">
+      <div class="brand">
+        <div class="logo">ST</div>
+        <div>
+          <div style="font-weight:700">Switch Tracker</div>
+          <div class="small">Your applied jobs</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="daily.html">📅 Daily job update</a>
+        <a href="apply.html">📝 Apply job</a>
+        <a href="applied.html">📋 Applied jobs</a>
+      </nav>
+      <button class="collapse-toggle">Toggle sidebar</button>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div>
+          <div class="title">Applied jobs</div>
+          <div class="subtitle">Track status and update from here</div>
+        </div>
+      </div>
+
+      <section id="appliedHolder">
+        <div class="card empty">Loading applied jobs...</div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
