@@ -1,0 +1,111 @@
+/* ===== Global Theme ===== */
+:root {
+  --bg-1: #02040a;
+  --bg-2: #07112a;
+  --accent: #0ea5ff;
+  --muted: #9aa8bf;
+  --glass: rgba(255, 255, 255, 0.03);
+  --contrast-text: #ecf6ff;
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 72px;
+  font-family: "Consta", "Consolas", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ===== Base Styles ===== */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, var(--bg-1), var(--bg-2));
+  font-family: inherit;
+  color: var(--contrast-text);
+}
+
+/* ===== Container ===== */
+.details-container {
+  background: var(--glass);
+  border: 1px solid var(--muted);
+  border-radius: 1rem;
+  width: 400px;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.details-container:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== Headings ===== */
+h2 {
+  margin-bottom: 0.5rem;
+  color: var(--contrast-text);
+  font-size: 1.8rem;
+}
+
+p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Form Styles ===== */
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--bg-2);
+  color: var(--contrast-text);
+  border: 1px solid var(--muted);
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+/* ===== Button ===== */
+button {
+  width: 100%;
+  background: var(--accent);
+  color: var(--contrast-text);
+  padding: 0.9rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #0c8de5;
+  transform: scale(1.05);
+}
+
+/* ===== Message ===== */
+#message {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--accent);
+  font-size: 0.9rem;
+}

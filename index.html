@@ -1,53 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Switch Tracker — Home</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>DSA Website</title>
+  <link rel="stylesheet" href="dsa_styles.css">
+  <script>
+    // Redirect to dsa_home.html on page load
+    window.onload = function () {
+      window.location.href = "dsa_home.html";
+    };
+  </script>
 </head>
-<body data-page="index">
-  <div class="app">
-    <aside class="sidebar" role="navigation" aria-label="Main sidebar">
-      <div class="brand">
-        <div class="logo">ST</div>
-        <div>
-          <div style="font-weight:700">Switch Tracker</div>
-          <div class="small">Job application tracker</div>
-        </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">🏠 Home</a>
-        <a href="daily.html">📅 Daily job update</a>
-        <a href="apply.html">📝 Apply job</a>
-        <a href="applied.html">📋 Applied jobs</a>
-      </nav>
-      <button class="collapse-toggle">Toggle sidebar</button>
-    </aside>
-
-    <main class="main">
-      <div class="header">
-        <div>
-          <div class="title">Welcome</div>
-          <div class="subtitle">Quick actions to get you started</div>
-        </div>
-        <div class="small">Logged in as <strong>Sama</strong></div>
-      </div>
-
-      <section class="center-cta">
-        <button class="cta-btn" data-nav="daily.html">Daily job update</button>
-        <button class="cta-btn" data-nav="apply.html">Apply company</button>
-        <button class="cta-btn" data-nav="applied.html">Applied companies</button>
-      </section>
-
-      <section id="statsHolder" class="card">
-        <!-- stats loaded from backend (example endpoint /api/stats) -->
-        <div class="empty">Loading summary from backend...</div>
-      </section>
-
-    </main>
-  </div>
-
-  <script src="app.js"></script>
+<body>
+  <noscript>
+    <p>Please enable JavaScript. Click <a href="login.html">here</a> to go to Home.</p>
+  </noscript>
 </body>
 </html>

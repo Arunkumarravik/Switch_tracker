@@ -115,7 +115,6 @@ function bootApply(){
     const now = new Date();
     const formattedTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
     console.log(formattedTimestamp);
-
   
     json_data={
       user_id : "1" ,
@@ -154,11 +153,24 @@ function bootApply(){
 }
 
 /* ----- APPLIED ----- */
+
+
 async function bootApplied(){
   const holder = document.getElementById('appliedHolder');
   holder.innerHTML = `<div class="card empty">Loading...</div>`;
+
+  json_data={
+      user_id : "1" ,
+      company_id :  "1"
+  }
   try {
-    const res = await fetch('/api/applied');
+    const res = await fetch('https://get-company-details-214580149659.us-west1.run.app' ,
+      {
+        method : 'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(json_data)
+      }
+    );
     if (!res.ok) throw new Error('fetch failed');
     const rows = await res.json();
     if (!rows.length) {
@@ -167,26 +179,66 @@ async function bootApplied(){
     }
     holder.innerHTML = renderAppliedTable(rows);
     // wire up update buttons
+
     document.querySelectorAll('.update-status-btn').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        const id = e.currentTarget.dataset.id;
-        const input = document.querySelector(`#status-input-${id}`);
-        const newStatus = input.value.trim();
-        if (!newStatus) { alert('Enter a status'); return; }
-        try {
-          const res = await fetch(`/api/applied/${id}/status`, {
-            method:'PUT',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ status: newStatus })
-          });
-          if (!res.ok) throw new Error('update failed');
-          alert('Status updated');
-        } catch (err) {
-          alert('Update failed. See console.');
-          console.warn(err);
-        }
+  btn.addEventListener('click', async (e) => {
+    const id = e.currentTarget.dataset.id;
+
+    // get input value (new status)
+    const input = document.querySelector(`#status-input-${id}`);
+    const newStatus = input.value.trim();
+    if (!newStatus) { 
+      alert('Enter a status'); 
+      return; 
+    }
+
+    // find the corresponding table row
+    const row = e.currentTarget.closest('tr');
+
+    // extract values from that row
+    const company_name = row.children[0].textContent.trim();
+    const current_status = row.children[1].textContent.trim();
+    const applied_days_ago = row.children[2].textContent.trim();
+
+    // timestamp for modification
+    const now = new Date();
+    const formattedTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
+
+    // build JSON dynamically
+    const json_data = {
+      user_id: "1",
+      current_company_id: "1",
+      company_id: "-",  // using button's data-id as company id
+      company_name: company_name,
+      contacted_via_social_media:true, // fill if you have this info
+      company_url: "", // can be fetched if part of backend data
+      job_applied_ts: formattedTimestamp,
+      modified_ts: formattedTimestamp,
+      key_role: "Data Engineer",
+      status: newStatus, // updated status from input
+      operation_type: "U", // U for update
+      comments: `Previous status: ${current_status} | Applied ${applied_days_ago} days ago`
+    };
+
+    console.log("Sending JSON:", json_data);
+
+    try {
+      const res = await fetch('https://post-company-details-214580149659.us-west1.run.app', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(json_data)
       });
-    });
+      const data = await res.json(); // 👈 read response body
+      console.log('Response data:', data);
+      if (!res.ok) throw new Error('update failed');
+      alert('Status updated');
+    } catch (err) {
+      alert('Update failed. See console.');
+      console.warn(err);
+    }
+  });
+});
+
   } catch (err) {
     holder.innerHTML = `<div class="card empty">Failed to load applied list.</div>`;
     console.warn(err);

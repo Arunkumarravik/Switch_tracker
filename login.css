@@ -1,0 +1,129 @@
+/* ===== Global Theme ===== */
+:root {
+  --bg-1: #02040a;
+  --bg-2: #07112a;
+  --accent: #0ea5ff;
+  --muted: #9aa8bf;
+  --glass: rgba(255, 255, 255, 0.03);
+  --contrast-text: #ecf6ff;
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 72px;
+  font-family: "Consta", "Consolas", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ===== Base Styles ===== */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  font-family: inherit;
+  color: var(--contrast-text);
+}
+
+/* ===== Container ===== */
+.login-container {
+  background: var(--glass);
+  border: 1px solid var(--muted);
+  border-radius: 1rem;
+  width: 380px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== Headings ===== */
+h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  color: var(--contrast-text);
+}
+
+p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Input Fields ===== */
+.input-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--muted);
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--bg-2);
+  color: var(--contrast-text);
+  border: 1px solid var(--muted);
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+/* ===== Buttons ===== */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+button {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: var(--contrast-text);
+}
+
+.btn.primary:hover {
+  background: #0c8de5;
+  transform: scale(1.05);
+}
+
+.btn.secondary {
+  background: var(--muted);
+  color: var(--bg-1);
+}
+
+.btn.secondary:hover {
+  background: var(--accent);
+  color: var(--contrast-text);
+  transform: scale(1.05);
+}
+
+/* ===== Message ===== */
+#message {
+  margin-top: 1rem;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
