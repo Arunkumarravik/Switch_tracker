@@ -115,19 +115,14 @@ function bootApply(){
     const now = new Date();
     const formattedTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
     console.log(formattedTimestamp);
-  
+    const usr_cmpy_id = localStorage.getItem("usr_cmpy_id");
     json_data={
-      user_id : "1" ,
-      current_company_id : "1",
-      company_id: "56789" , 
+      usr_cmpy_id : usr_cmpy_id, 
       company_name : data.company_name ,
       contacted_via_social_media:  data.contacted_via_linkedin ,
       company_url : data.careers_link,
-      job_applied_ts :  formattedTimestamp,
-      modified_ts : formattedTimestamp,
-      key_role : "Data Engineer" ,
+      role : "Data Engineer" ,
       status : "Fresh" ,
-      operation_type : "I" , 
       comments : data.notes
     }
     
@@ -158,10 +153,10 @@ function bootApply(){
 async function bootApplied(){
   const holder = document.getElementById('appliedHolder');
   holder.innerHTML = `<div class="card empty">Loading...</div>`;
-
+  
+  const usr_cmpy_id = localStorage.getItem("usr_cmpy_id");
   json_data={
-      user_id : "1" ,
-      company_id :  "1"
+      usr_cmpy_id : usr_cmpy_id ,
   }
   try {
     const res = await fetch('https://get-company-details-214580149659.us-west1.run.app' ,
@@ -173,6 +168,8 @@ async function bootApplied(){
     );
     if (!res.ok) throw new Error('fetch failed');
     const rows = await res.json();
+
+    console.log(rows)
     if (!rows.length) {
       holder.innerHTML = `<div class="card empty">No applied jobs found.</div>`;
       return;
@@ -199,24 +196,22 @@ async function bootApplied(){
     const company_name = row.children[0].textContent.trim();
     const current_status = row.children[1].textContent.trim();
     const applied_days_ago = row.children[2].textContent.trim();
-
+    const job_applied_ts= row.children[3].textContent.trim();
+    const company_url=row.children[4].textContent.trim();
+        //Company applied url 
     // timestamp for modification
     const now = new Date();
     const formattedTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
-
+    const usr_cmpy_id = localStorage.getItem("usr_cmpy_id");
     // build JSON dynamically
     const json_data = {
-      user_id: "1",
-      current_company_id: "1",
-      company_id: "-",  // using button's data-id as company id
+      usr_cmpy_id :  usr_cmpy_id ,// using button's data-id as company id
       company_name: company_name,
-      contacted_via_social_media:true, // fill if you have this info
-      company_url: "", // can be fetched if part of backend data
-      job_applied_ts: formattedTimestamp,
-      modified_ts: formattedTimestamp,
-      key_role: "Data Engineer",
-      status: newStatus, // updated status from input
-      operation_type: "U", // U for update
+      contacted_via_social_media:null, // fill if you have this info
+      company_url: company_url, // can be fetched if part of backend data
+      job_applied_ts: job_applied_ts,
+      role: null,
+      status: newStatus, 
       comments: `Previous status: ${current_status} | Applied ${applied_days_ago} days ago`
     };
 
@@ -249,7 +244,7 @@ function renderAppliedTable(rows){
     <div class="card">
       <table class="table" role="table" aria-label="Applied jobs">
         <thead>
-          <tr><th>Company name</th><th>Status</th><th>Applied days ago</th><th>Change status</th></tr>
+          <tr><th>Company name</th><th>Status</th><th>Applied days ago</th><th>job_applied_ts</th><th>company_url</th><th>Change status</th></tr>
         </thead>
         <tbody>
           ${rows.map(r => `
@@ -257,6 +252,8 @@ function renderAppliedTable(rows){
               <td>${escapeHtml(r.company)}</td>
               <td>${escapeHtml(r.status)}</td>
               <td>${escapeHtml(String(r.applied_days_ago))}</td>
+              <td>${escapeHtml(r.f0_)}</td>
+              <td>${escapeHtml(r.company_url)}</td>
               <td>
                 <div style="display:flex;gap:8px;align-items:center;">
                   <input id="status-input-${r.id}" class="input" type="text" placeholder="New status" />
