@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Page-specific bootstraps
   const page = document.body.dataset.page;
-  if (page === 'index') bootIndex();
+  if (page === 'home') bootIndex();
   if (page === 'daily') bootDaily();
   if (page === 'apply') bootApply();
   if (page === 'applied') bootApplied();
@@ -196,7 +196,8 @@ async function bootApplied(){
     const company_name = row.children[0].textContent.trim();
     const current_status = row.children[1].textContent.trim();
     const applied_days_ago = row.children[2].textContent.trim();
-    const job_applied_ts= row.children[3].textContent.trim();
+    let job_ts= row.children[3].textContent.trim();
+    let cleanTimestamp = job_ts.split("+")[0];
     const company_url=row.children[4].textContent.trim();
         //Company applied url 
     // timestamp for modification
@@ -209,7 +210,7 @@ async function bootApplied(){
       company_name: company_name,
       contacted_via_social_media:null, // fill if you have this info
       company_url: company_url, // can be fetched if part of backend data
-      job_applied_ts: job_applied_ts,
+      job_applied_ts: cleanTimestamp,
       role: null,
       status: newStatus, 
       comments: `Previous status: ${current_status} | Applied ${applied_days_ago} days ago`
