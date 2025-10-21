@@ -22,7 +22,9 @@ const payload = {
   if (res.ok) {
     const data = await res.json();
     console.log("Sign up =>" , data);
-    localStorage.setItem("user_id", data.user_id);
+    //console.log("Sending -  User id" , username ,  "Received_user_id" , data.user_id )
+
+    localStorage.setItem("user_id", username);
     window.location.href = "personal_details.html";
   } else {
     alert("Signup failed. Try again!");
@@ -67,7 +69,7 @@ document.getElementById("signInBtn").addEventListener("click", async () => {
 
     if (rest.ok) {
             const resp = await rest.json();
-            console.log("first_time" , resp);
+            console.log("first_time" , resp, "User id :" , data.user_id);
             localStorage.setItem("usr_cmpy_id", resp.usr_cmpy_id);
             window.location.href = "home.html";
     } else {
